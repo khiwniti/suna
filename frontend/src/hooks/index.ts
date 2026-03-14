@@ -56,6 +56,11 @@ export * from './onboarding';
 // Integrations
 export * from './integrations';
 
+// Tool Panel Bridge - for tool→panel activation
+export { useToolPanelBridge, TOOL_PANEL_MAP } from './useToolPanelBridge';
+export { useToolPanelEventSubscriptions } from './useToolPanelEventSubscriptions';
+export { useToolCallHandler } from './useToolCallHandler';
+
 
 
  
