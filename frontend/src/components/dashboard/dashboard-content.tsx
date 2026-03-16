@@ -391,7 +391,7 @@ export function DashboardContent() {
                         : "text-muted-foreground hover:text-foreground"
                     )}
                   >
-                    Kortix Super Worker
+                    Carbon BIM Super Worker
                   </button>
                   <button
                     onClick={() => {

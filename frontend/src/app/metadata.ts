@@ -4,14 +4,14 @@ import { siteConfig } from '@/lib/site';
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
-  keywords: ['Kortix', 'Kortix AI', 'Suna', 'Kortix Suna', 'AI', 'Agent', 'Open Source', 'AI assistant', 'generalist AI worker'],
+  keywords: ['Carbon BIM', 'BIM Agent', 'Embodied Carbon', 'Building Information Modeling', 'AI', 'Agent', 'Open Source', 'AI assistant', 'construction AI'],
   authors: [
     {
-      name: 'Kortix AI Corp',
-      url: 'https://kortix.com',
+      name: 'Carbon BIM Team',
+      url: 'https://autonomous-bim-agent.vercel.app',
     },
   ],
-  creator: 'Kortix AI Corp',
+  creator: 'Carbon BIM Team',
   openGraph: {
     type: 'website',
     locale: 'en_US',

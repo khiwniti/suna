@@ -28,11 +28,11 @@ export interface PricingTier {
 }
 
 export const siteConfig = {
-  name: 'Kortix',
-  description: 'The Generalist AI Worker that can act on your behalf.',
+  name: 'Carbon BIM',
+  description: 'Autonomous BIM Agent for embodied carbon analysis and intelligent construction workflows.',
   cta: 'Start Free',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-  keywords: ['AI Worker', 'Generalist AI', 'Open Source AI', 'Autonomous Agent'],
+  keywords: ['BIM Agent', 'Embodied Carbon', 'Building Information Modeling', 'Construction AI'],
   links: {
     email: 'support@kortix.com',
     twitter: 'https://x.com/kortix',
@@ -263,11 +263,11 @@ export const siteConfig = {
   ],
   footerLinks: [
     {
-      title: 'Kortix',
+      title: 'Carbon BIM',
       links: [
-        { id: 1, title: 'About', url: 'https://kortix.com' },
+        { id: 1, title: 'About', url: 'https://autonomous-bim-agent.vercel.app' },
         { id: 3, title: 'Contact', url: 'mailto:hey@kortix.com' },
-        { id: 4, title: 'Careers', url: 'https://kortix.com/careers' },
+        { id: 4, title: 'Careers', url: 'https://autonomous-bim-agent.vercel.app/careers' },
       ],
     },
     {

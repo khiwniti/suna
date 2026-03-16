@@ -237,7 +237,7 @@
     "chatDescription": "Conversa simples de ida e volta",
     "sampleAnswers": "Respostas de exemplo",
     "samplePrompts": "Prompts de exemplo",
-    "waitingForUserResponse": "Kortix continuará trabalhando de forma autônoma após tua resposta.",
+    "waitingForUserResponse": "Carbon BIM continuará trabalhando de forma autônoma após tua resposta.",
     "taskCompleted": "Tarefa concluída",
     "uploadingFiles": "Enviando {count} arquivo{plural}...",
     "uploadingFilesOne": "Enviando {count} arquivo...",
@@ -261,7 +261,7 @@
     "rateThisResult": "Avaliar este resultado",
     "feedbackHelpsImprove": "Teu feedback nos ajuda a melhorar",
     "additionalFeedbackOptional": "Feedback adicional (opcional)",
-    "helpKortixImprove": "Ajuda Kortix a melhorar com teu feedback",
+    "helpCarbon BIMImprove": "Ajuda Carbon BIM a melhorar com teu feedback",
     "submit": "Enviar",
     "submitting": "Enviando...",
     "feedbackSubmittedSuccess": "Feedback enviado com sucesso",
@@ -312,10 +312,10 @@
     "localModeMessage": "Executando em modo de desenvolvimento local - recursos de cobrança desabilitados",
     "creditsExplainedPage": {
       "title": "Créditos Explicados",
-      "subtitle": "Tudo o que precisas saber sobre como os créditos funcionam no Kortix",
+      "subtitle": "Tudo o que precisas saber sobre como os créditos funcionam no Carbon BIM",
       "understandingCredits": {
         "title": "Entendendo Créditos",
-        "description": "Os créditos servem como moeda universal do Kortix para operações da plataforma. Cada ação que teus agentes de IA executam—de analisar dados a gerar código—consome créditos com base na complexidade da tarefa e nos recursos necessários."
+        "description": "Os créditos servem como moeda universal do Carbon BIM para operações da plataforma. Cada ação que teus agentes de IA executam—de analisar dados a gerar código—consome créditos com base na complexidade da tarefa e nos recursos necessários."
       },
       "howCreditsWork": {
         "title": "Como os Créditos Funcionam",
@@ -333,7 +333,7 @@
       },
       "gettingMoreCredits": {
         "title": "Obtendo Mais Créditos",
-        "description": "Existem várias formas de obter créditos no Kortix:",
+        "description": "Existem várias formas de obter créditos no Carbon BIM:",
         "monthlySubscription": {
           "title": "Créditos de Assinatura Mensal",
           "description": "Incluídos no teu plano pago e renovados automaticamente a cada mês. Estes são créditos com expiração."
@@ -353,7 +353,7 @@
       },
       "typesOfCredits": {
         "title": "Tipos de Créditos",
-        "description": "O Kortix usa dois tipos de créditos para te dar flexibilidade em como geres teu uso:",
+        "description": "O Carbon BIM usa dois tipos de créditos para te dar flexibilidade em como geres teu uso:",
         "expiringCredits": {
           "title": "Créditos com Expiração",
           "description": "Créditos de assinatura mensal",
@@ -366,7 +366,7 @@
         },
         "creditPriority": {
           "title": "Prioridade de Créditos:",
-          "description": "Quando usas o Kortix, os créditos com expiração são consumidos primeiro. Apenas após os teus créditos com expiração se esgotarem, os créditos sem expiração serão usados."
+          "description": "Quando usas o Carbon BIM, os créditos com expiração são consumidos primeiro. Apenas após os teus créditos com expiração se esgotarem, os créditos sem expiração serão usados."
         }
       }
     },

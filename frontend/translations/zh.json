@@ -237,7 +237,7 @@
     "chatDescription": "简单的来回对话",
     "sampleAnswers": "示例答案",
     "samplePrompts": "示例提示",
-    "waitingForUserResponse": "您回答后，Kortix将继续自主工作。",
+    "waitingForUserResponse": "您回答后，Carbon BIM将继续自主工作。",
     "taskCompleted": "任务已完成",
     "uploadingFiles": "正在上传 {count} 个文件...",
     "uploadingFilesOne": "正在上传 {count} 个文件...",
@@ -261,7 +261,7 @@
     "rateThisResult": "评价此结果",
     "feedbackHelpsImprove": "您的反馈帮助我们改进",
     "additionalFeedbackOptional": "附加反馈（可选）",
-    "helpKortixImprove": "帮助 Kortix 通过您的反馈改进",
+    "helpCarbon BIMImprove": "帮助 Carbon BIM 通过您的反馈改进",
     "submit": "提交",
     "submitting": "提交中...",
     "feedbackSubmittedSuccess": "反馈提交成功",
@@ -312,10 +312,10 @@
     "localModeMessage": "在本地开发模式下运行 - 账单功能已禁用",
     "creditsExplainedPage": {
       "title": "积分说明",
-      "subtitle": "关于 Kortix 积分工作原理你需要知道的一切",
+      "subtitle": "关于 Carbon BIM 积分工作原理你需要知道的一切",
       "understandingCredits": {
         "title": "了解积分",
-        "description": "积分是 Kortix 平台操作的通用货币。你的 AI 智能体执行的每个操作——从分析数据到生成代码——都会根据任务的复杂性和所需资源消耗积分。"
+        "description": "积分是 Carbon BIM 平台操作的通用货币。你的 AI 智能体执行的每个操作——从分析数据到生成代码——都会根据任务的复杂性和所需资源消耗积分。"
       },
       "howCreditsWork": {
         "title": "积分如何工作",
@@ -333,7 +333,7 @@
       },
       "gettingMoreCredits": {
         "title": "获取更多积分",
-        "description": "在 Kortix 中有几种获取积分的方式：",
+        "description": "在 Carbon BIM 中有几种获取积分的方式：",
         "monthlySubscription": {
           "title": "月度订阅积分",
           "description": "包含在你的付费计划中，每月自动续订。这些是过期积分。"
@@ -353,7 +353,7 @@
       },
       "typesOfCredits": {
         "title": "积分类型",
-        "description": "Kortix 使用两种类型的积分，让你灵活管理使用：",
+        "description": "Carbon BIM 使用两种类型的积分，让你灵活管理使用：",
         "expiringCredits": {
           "title": "过期积分",
           "description": "月度订阅积分",
@@ -366,7 +366,7 @@
         },
         "creditPriority": {
           "title": "积分优先级：",
-          "description": "当你使用 Kortix 时，过期积分首先被消耗。只有在过期积分用完后，才会使用不过期积分。"
+          "description": "当你使用 Carbon BIM 时，过期积分首先被消耗。只有在过期积分用完后，才会使用不过期积分。"
         }
       }
     },

@@ -94,7 +94,7 @@ function LegalContent() {
                       </h3>
                       <div className="text-muted-foreground mb-6 space-y-2">
                         <p>
-                          <strong>Kortix AI Corp</strong>
+                          <strong>Carbon BIM Team</strong>
                         </p>
                         <p>701 Tillery Street</p>
                         <p>Unit 12-2521</p>
@@ -121,7 +121,7 @@ function LegalContent() {
                         Responsible for Content
                       </h3>
                       <p className="text-muted-foreground mb-6">
-                        Kortix AI Corp is responsible for the content of this
+                        Carbon BIM Team is responsible for the content of this
                         website in accordance with applicable laws.
                       </p>
 
@@ -157,7 +157,7 @@ function LegalContent() {
                       <p className="text-muted-foreground text-balance mb-6">
                         PLEASE READ THESE TERMS OF USE ("AGREEMENT" OR "TERMS OF
                         USE" or "TERMS OF SERVICE" or "TERMS AND CONDITIONS")
-                        CAREFULLY BEFORE USING THE SERVICES OFFERED BY Kortix AI
+                        CAREFULLY BEFORE USING THE SERVICES OFFERED BY Carbon BIM
                         Corp (701 Tillery Street Unit 12-2521 Austin, Texas 78702,
                         United States). THIS AGREEMENT SETS FORTH THE LEGALLY
                         BINDING TERMS AND CONDITIONS FOR YOUR USE OF THE SUNA
@@ -169,7 +169,7 @@ function LegalContent() {
                       </h3>
                       <ul className="text-muted-foreground space-y-1 mb-6">
                         <li>
-                          "Company" refers to Kortix AI Corp (701 Tillery Street
+                          "Company" refers to Carbon BIM Team (701 Tillery Street
                           Unit 12-2521 Austin, Texas 78702, United States).
                         </li>
                         <li>
