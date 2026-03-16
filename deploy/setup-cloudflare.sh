@@ -9,7 +9,7 @@
 # ============================================================================
 set -euo pipefail
 
-CF_API_TOKEN="${CF_API_TOKEN:-JGGCWtxKSJBCoAvjrcMMZq-ZW_ba_dApCurH}"
+CF_API_TOKEN="${CF_API_TOKEN:?ERROR: CF_API_TOKEN is required. Export it before running this script.}"
 ZONE_NAME="${ZONE_NAME:-ensim.space}"
 TUNNEL_NAME="carbon-bim-tunnel"
 HOSTNAME="bim.ensim.space"

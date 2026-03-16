@@ -1,5 +1,11 @@
 .DS_Store
 
+# ── Deployment secrets (never commit) ───────────────────────────────────────
+cloudflared/credentials.json
+backend/.env
+frontend/.env.local
+frontend/.env.production.local
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
