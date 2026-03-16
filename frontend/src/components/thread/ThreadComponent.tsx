@@ -54,6 +54,8 @@ import { fileQueryKeys } from '@/hooks/files';
 import { useProjectRealtime } from '@/hooks/threads';
 import { handleGoogleSlidesUpload } from './tool-views/utils/presentation-utils';
 import { useTranslations } from 'next-intl';
+import { useToolCallHandler, useToolPanelEventSubscriptions } from '@/hooks';
+import { safeJsonParse } from '@/components/thread/utils';
 
 interface ThreadComponentProps {
   projectId: string;
@@ -199,6 +201,12 @@ export function ThreadComponent({ projectId, threadId, compact = false, configur
 
   // Real-time project updates (for sandbox creation) - always call unconditionally
   useProjectRealtime(projectId);
+
+  // Tool panel event subscriptions - wire panel store to event bus
+  useToolPanelEventSubscriptions();
+
+  // Tool call handler - bridges tool completions to panel activation
+  const { onToolStarted, onToolCompleted } = useToolCallHandler();
 
   // Keyboard shortcuts
   useThreadKeyboardShortcuts({
@@ -390,6 +398,24 @@ export function ThreadComponent({ projectId, threadId, compact = false, configur
 
       if (message.type === 'tool') {
         setAutoOpenedPanel(false);
+        // Wire tool completion to panel activation
+        try {
+          const parsedContent = safeJsonParse(message.content, {} as Record<string, unknown>);
+          const toolName = (parsedContent as Record<string, unknown>).tool_name as string
+            || (parsedContent as Record<string, unknown>).xml_tag_name as string
+            || (parsedContent as Record<string, unknown>).name as string;
+          if (toolName) {
+            const result = (parsedContent as Record<string, unknown>).result ?? parsedContent;
+            onToolCompleted({
+              id: message.message_id || `tool-${Date.now()}`,
+              name: toolName,
+              status: 'success',
+              result: result as Record<string, unknown>,
+            });
+          }
+        } catch {
+          // Ignore parse errors - tool panel activation is non-critical
+        }
       }
 
       // Auto-scroll to bottom (top: 0 in flex-col-reverse) when new messages arrive
@@ -843,8 +869,16 @@ export function ThreadComponent({ projectId, threadId, compact = false, configur
   useEffect(() => {
     if (streamingToolCall) {
       handleStreamingToolCall(streamingToolCall);
+      // Wire tool start event to panel loading state
+      const toolName = streamingToolCall.name || streamingToolCall.xml_tag_name;
+      if (toolName) {
+        onToolStarted({
+          id: `streaming-${streamingToolCall.index ?? Date.now()}`,
+          name: toolName,
+        });
+      }
     }
-  }, [streamingToolCall, handleStreamingToolCall]);
+  }, [streamingToolCall, handleStreamingToolCall, onToolStarted]);
 
   useEffect(() => {
     setIsSidePanelAnimating(true);

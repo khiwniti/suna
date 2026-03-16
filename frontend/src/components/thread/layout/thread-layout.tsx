@@ -13,6 +13,8 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from '@/components/ui/resizable';
+import { useToolPanelStore } from '@/stores/tool-panel-store';
+import { ToolPanel, CarbonDashboardPanel, BOQTablePanel } from '@/components/tool-panels/ToolPanels';
 
 interface ThreadLayoutProps {
   children: React.ReactNode;
@@ -84,14 +86,19 @@ export function ThreadLayout({
   leftSidebarState = 'collapsed',
 }: ThreadLayoutProps) {
   const isActuallyMobile = useIsMobile();
-  
+
   // Track when panel should be visible
   const shouldShowPanel = isSidePanelOpen && initialLoadCompleted;
-  
+
+  // Track active workspace tool panels
+  const activePanelId = useToolPanelStore((state) => state.activePanelId);
+  const shouldShowWorkspacePanel = !!activePanelId && !isActuallyMobile;
+  const workspacePanelRef = useRef<ResizablePrimitive.ImperativePanelHandle>(null);
+
   // Refs for panel APIs to control sizes programmatically
   const mainPanelRef = useRef<ResizablePrimitive.ImperativePanelHandle>(null);
   const sidePanelRef = useRef<ResizablePrimitive.ImperativePanelHandle>(null);
-  
+
   // Update sizes when panel visibility changes with smooth animation
   useEffect(() => {
     if (shouldShowPanel) {
@@ -109,6 +116,17 @@ export function ThreadLayout({
       return () => clearTimeout(timeout);
     }
   }, [shouldShowPanel]);
+
+  // Update workspace panel size when BIM tool panel activates/deactivates
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      if (shouldShowWorkspacePanel) {
+        workspacePanelRef.current?.resize(35);
+      } else {
+        workspacePanelRef.current?.resize(0);
+      }
+    });
+  }, [shouldShowWorkspacePanel]);
 
   // Compact mode for embedded use
   if (compact) {
@@ -297,6 +315,34 @@ export function ThreadLayout({
             agentName={agentName}
             disableInitialAnimation={disableInitialAnimation}
           />
+        </ResizablePanel>
+
+        {/* Workspace panels handle - only visible when workspace panel is open */}
+        {shouldShowWorkspacePanel && (
+          <ResizableHandle withHandle={true} className="z-20 w-0" />
+        )}
+
+        {/* Workspace tool panels - activated by BIM AI tool calls */}
+        <ResizablePanel
+          ref={workspacePanelRef}
+          defaultSize={shouldShowWorkspacePanel ? 35 : 0}
+          minSize={0}
+          maxSize={60}
+          collapsible={true}
+          className={cn(
+            "relative overflow-hidden",
+            !shouldShowWorkspacePanel && "hidden"
+          )}
+        >
+          {/* Carbon Dashboard Panel */}
+          <ToolPanel panelId="carbon-dashboard">
+            {() => <CarbonDashboardPanel />}
+          </ToolPanel>
+
+          {/* BOQ Table Panel */}
+          <ToolPanel panelId="boq-table">
+            {() => <BOQTablePanel />}
+          </ToolPanel>
         </ResizablePanel>
       </ResizablePanelGroup>
 
