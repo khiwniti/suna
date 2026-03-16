@@ -336,7 +336,7 @@ export function HeroSection() {
               </button> */}
                         </div>
                         <DialogDescription className="text-muted-foreground">
-                            Sign in or create an account to talk with Kortix
+                            Sign in or create an account to talk with Carbon BIM
                         </DialogDescription>
                     </DialogHeader>
 

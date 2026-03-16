@@ -1,0 +1,21 @@
+# ============================================================================
+# Cloudflare Tunnel Config — Carbon BIM
+# Domain: bim.ensim.space
+#
+# This file is auto-populated by deploy/setup-cloudflare.sh
+# The tunnel-id and credentials-file are filled in at setup time.
+# ============================================================================
+
+tunnel: TUNNEL_ID_PLACEHOLDER
+credentials-file: /etc/cloudflared/credentials.json
+
+ingress:
+  # Route all traffic for bim.ensim.space to local nginx
+  - hostname: bim.ensim.space
+    service: http://nginx:80
+    originRequest:
+      connectTimeout: 30s
+      noTLSVerify: false
+
+  # Catch-all: reject everything else
+  - service: http_status:404

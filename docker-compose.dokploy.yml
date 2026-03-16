@@ -1,0 +1,164 @@
+# ============================================================================
+# CARBON BIM — DOKPLOY DEPLOYMENT
+# Domain: bim.ensim.space
+# ============================================================================
+# How Dokploy routes traffic:
+#
+#   Internet (HTTPS)
+#     └─► Traefik (managed by Dokploy, port 443)
+#           ├─► bim.ensim.space/api/* ──► backend:8000
+#           └─► bim.ensim.space/*     ──► frontend:3000
+#
+# Setup in Dokploy UI:
+#   1. Projects → New Project → "carbon-bim"
+#   2. Add Service → Compose → paste this file
+#   3. Add env vars (see .env.dokploy.example)
+#   4. Deploy
+# ============================================================================
+
+services:
+
+  # ── Redis ─────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: >
+      redis-server
+      --save 60 1
+      --loglevel warning
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  # ── Backend API ────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: carbon-bim-backend:latest
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_SSL=False
+      - ENV_MODE=production
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - internal
+      - dokploy-network
+    labels:
+      - traefik.enable=true
+      # ── HTTPS router ────────────────────────────────────────────────────
+      - traefik.http.routers.carbon-bim-api.rule=Host(`bim.ensim.space`) && PathPrefix(`/api`)
+      - traefik.http.routers.carbon-bim-api.entrypoints=websecure
+      - traefik.http.routers.carbon-bim-api.tls.certresolver=letsencrypt
+      - traefik.http.routers.carbon-bim-api.priority=20
+      # ── HTTP redirect ────────────────────────────────────────────────────
+      - traefik.http.routers.carbon-bim-api-http.rule=Host(`bim.ensim.space`) && PathPrefix(`/api`)
+      - traefik.http.routers.carbon-bim-api-http.entrypoints=web
+      - traefik.http.routers.carbon-bim-api-http.middlewares=redirect-to-https
+      # ── Service ─────────────────────────────────────────────────────────
+      - traefik.http.services.carbon-bim-api.loadbalancer.server.port=8000
+      # ── Middlewares ──────────────────────────────────────────────────────
+      # SSE/streaming: disable buffering
+      - traefik.http.middlewares.carbon-bim-api-headers.headers.customResponseHeaders.X-Accel-Buffering=no
+      - traefik.http.routers.carbon-bim-api.middlewares=carbon-bim-api-headers
+
+  # ── Background Worker ──────────────────────────────────────────────────────
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: carbon-bim-backend:latest
+    restart: unless-stopped
+    command: uv run dramatiq --skip-logging --processes 4 --threads 4 run_agent_background
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_SSL=False
+      - ENV_MODE=production
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    networks:
+      - internal
+    # No Traefik labels — worker has no HTTP interface
+
+  # ── Frontend ───────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_ENV_MODE=production
+        - NEXT_PUBLIC_BACKEND_URL=https://bim.ensim.space/api
+        - NEXT_PUBLIC_URL=https://bim.ensim.space
+        - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+        - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID:-}
+        - NEXT_PUBLIC_POSTHOG_KEY=${NEXT_PUBLIC_POSTHOG_KEY:-}
+    image: carbon-bim-frontend:latest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_ENV_MODE=production
+      - NEXT_PUBLIC_BACKEND_URL=https://bim.ensim.space/api
+      - NEXT_PUBLIC_URL=https://bim.ensim.space
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - internal
+      - dokploy-network
+    labels:
+      - traefik.enable=true
+      # ── HTTPS router ────────────────────────────────────────────────────
+      - traefik.http.routers.carbon-bim-web.rule=Host(`bim.ensim.space`)
+      - traefik.http.routers.carbon-bim-web.entrypoints=websecure
+      - traefik.http.routers.carbon-bim-web.tls.certresolver=letsencrypt
+      - traefik.http.routers.carbon-bim-web.priority=10
+      # ── HTTP → HTTPS redirect ────────────────────────────────────────────
+      - traefik.http.routers.carbon-bim-web-http.rule=Host(`bim.ensim.space`)
+      - traefik.http.routers.carbon-bim-web-http.entrypoints=web
+      - traefik.http.routers.carbon-bim-web-http.middlewares=redirect-to-https
+      # ── Service ─────────────────────────────────────────────────────────
+      - traefik.http.services.carbon-bim-web.loadbalancer.server.port=3000
+      # ── Shared redirect middleware ────────────────────────────────────────
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true
+
+networks:
+  # Internal network (not exposed to Traefik)
+  internal:
+    driver: bridge
+
+  # Dokploy's shared Traefik network — attach services that need public access
+  dokploy-network:
+    external: true
+
+volumes:
+  redis_data:

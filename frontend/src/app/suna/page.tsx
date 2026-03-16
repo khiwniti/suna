@@ -4,8 +4,8 @@ import { ArrowRight, Github } from 'lucide-react';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Suna is now Kortix | Kortix Suna - Open Source AI Worker',
-  description: 'Suna has rebranded to Kortix. Kortix (formerly Suna) is the same powerful open source AI assistant and generalist AI worker you know and love, now with a new name and bigger vision.',
+  title: 'Kortix is now Carbon BIM | Kortix Suna - Open Source AI Worker',
+  description: 'Kortix has rebranded to Carbon BIM. Carbon BIM (formerly Kortix) is the same powerful open source AI assistant and generalist AI worker you know and love, now with a new name and bigger vision.',
   keywords: [
     'Suna',
     'Kortix Suna',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'where is Suna',
     'Kortix',
     'Suna rebrand',
-    'Suna is now Kortix',
+    'Kortix is now Carbon BIM',
     'AI assistant',
     'open source AI',
     'generalist AI worker',
@@ -23,28 +23,28 @@ export const metadata: Metadata = {
     'autonomous AI',
   ],
   openGraph: {
-    title: 'Suna is now Kortix',
-    description: 'Kortix (formerly Suna) - Same powerful open source AI worker, new name.',
+    title: 'Kortix is now Carbon BIM',
+    description: 'Carbon BIM (formerly Kortix) - Same powerful open source AI worker, new name.',
     type: 'website',
-    url: 'https://kortix.com/suna',
-    siteName: 'Kortix',
+    url: 'https://autonomous-bim-agent.vercel.app/suna',
+    siteName: "Carbon BIM",
     images: [
       {
         url: '/banner.png',
         width: 1200,
         height: 630,
-        alt: 'Kortix - Formerly Suna',
+        alt: "Carbon BIM - Formerly Kortix",
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Suna is now Kortix',
-    description: 'Kortix (formerly Suna) - Same powerful open source AI worker, new name.',
+    title: 'Kortix is now Carbon BIM',
+    description: 'Carbon BIM (formerly Kortix) - Same powerful open source AI worker, new name.',
     images: ['/banner.png'],
   },
   alternates: {
-    canonical: 'https://kortix.com/suna',
+    canonical: 'https://autonomous-bim-agent.vercel.app/suna',
   },
   robots: {
     index: true,
@@ -62,17 +62,15 @@ export default function SunaPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'Kortix',
-            alternateName: ['Suna', 'Kortix Suna', 'Suna AI'],
-            url: 'https://kortix.com',
-            logo: 'https://kortix.com/favicon.png',
+            name: 'Carbon BIM',
+            alternateName: ['Kortix', 'Carbon BIM Agent', 'Autonomous BIM Agent'],
+            url: 'https://autonomous-bim-agent.vercel.app',
+            logo: 'https://autonomous-bim-agent.vercel.app/favicon.png',
             sameAs: [
               'https://github.com/kortix-ai',
-              'https://x.com/kortix',
-              'https://linkedin.com/company/kortix',
             ],
             description:
-              'Kortix (formerly known as Suna) is an open source generalist AI worker that helps you accomplish real-world tasks through natural conversation.',
+              'Carbon BIM (formerly known as Kortix) is an autonomous BIM agent platform for embodied carbon analysis and intelligent construction workflows.',
           }),
         }}
       />
@@ -88,13 +86,13 @@ export default function SunaPage() {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://kortix.com',
+                item: 'https://autonomous-bim-agent.vercel.app',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
-                name: 'Suna is now Kortix',
-                item: 'https://kortix.com/suna',
+                name: 'Kortix is now Carbon BIM',
+                item: 'https://autonomous-bim-agent.vercel.app/suna',
               },
             ],
           }),
@@ -110,7 +108,7 @@ export default function SunaPage() {
               <div className="relative mb-8 sm:mb-12" style={{ width: '80px', height: '80px' }}>
                 <Image
                   src="/kortix-symbol.svg"
-                  alt="Kortix"
+                  alt="Carbon BIM"
                   fill
                   className="object-contain dark:invert"
                   priority
@@ -138,7 +136,7 @@ export default function SunaPage() {
 
               {/* Main Heading */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-tighter text-balance text-center">
-                Suna is now Kortix
+                Kortix is now Carbon BIM
               </h1>
 
               {/* Subheading */}
@@ -177,7 +175,7 @@ export default function SunaPage() {
                   What changed?
                 </h2>
                 <div className="space-y-3 text-base md:text-lg text-muted-foreground font-medium">
-                  <p>Our name changed from Suna to Kortix</p>
+                  <p>Our name changed from Kortix to Carbon BIM</p>
                   <p>Our domain is now kortix.com</p>
                 </div>
               </div>
@@ -218,7 +216,7 @@ export default function SunaPage() {
               <div className="relative w-full h-full" style={{ isolation: 'isolate' }}>
                 <Image
                   src="/wordmark.svg"
-                  alt="Kortix"
+                  alt="Carbon BIM"
                   fill
                   className="object-contain dark:invert opacity-10"
                   priority

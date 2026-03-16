@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: 'Kortix',
-  url: 'https://kortix.com',
-  description: 'Open Source Generalist AI Worker. Kortix is a fully open source AI assistant that helps you accomplish real-world tasks with ease through natural conversation.',
+  name: 'Carbon BIM',
+  url: 'https://autonomous-bim-agent.vercel.app',
+  description: 'Autonomous BIM Agent powered by AI. Carbon BIM is an open-source AI agent platform for building information modeling, embodied carbon analysis, and intelligent construction workflows.',
   links: {
     twitter: 'https://x.com/kortix',
     github: 'https://github.com/kortix-ai/',

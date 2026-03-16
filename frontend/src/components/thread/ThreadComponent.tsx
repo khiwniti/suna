@@ -791,7 +791,7 @@ export function ThreadComponent({ projectId, threadId, compact = false, configur
   // SEO title update
   useEffect(() => {
     if (projectName) {
-      document.title = `${projectName} | Kortix`;
+      document.title = `${projectName} | Carbon BIM`;
 
       const metaDescription = document.querySelector(
         'meta[name="description"]',
@@ -799,13 +799,13 @@ export function ThreadComponent({ projectId, threadId, compact = false, configur
       if (metaDescription) {
         metaDescription.setAttribute(
           'content',
-          `${projectName} - Interactive agent conversation powered by Kortix`,
+          `${projectName} - Interactive agent conversation powered by Carbon BIM`,
         );
       }
 
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', `${projectName} | Kortix`);
+        ogTitle.setAttribute('content', `${projectName} | Carbon BIM`);
       }
 
       const ogDescription = document.querySelector(
